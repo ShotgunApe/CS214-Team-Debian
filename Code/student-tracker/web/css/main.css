@@ -22,7 +22,18 @@ body {
 
 .inner-body table {
     border-collapse: separate;
-    border-spacing: 10px 20px;
+}
+
+.inner-body #table tbody {
+    float: left;
+    padding-left: 2px;
+    outline: 1px dotted #afafaf;
+}
+
+.inner-body #table-two tbody {
+    float: left;
+    padding-left: 2px;
+    outline: 1px dotted #afafaf;
 }
 
 .navbar li {
@@ -92,4 +103,8 @@ body {
 #userpage-right {
     float: right;
     width: 50%;
+}
+
+tr {
+
 }
