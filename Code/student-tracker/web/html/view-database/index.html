@@ -2,6 +2,13 @@
 <html lang="en">
     <header>
         <link rel="stylesheet" type="text/css" href="/web/css/main.css" />
+        <script src="/web/scripts/jquery-3.7.1.min.js"></script>
+        <script src="/web/scripts/main.js"></script>
+        <script>
+            $(document).ready(function(){ 
+                $().load_students();
+            });
+        </script>
         <title>Student Tracker</title>
     </header>
 
@@ -17,13 +24,13 @@
                 <li><a href="/add-entry">add entry</a></li>
             </ul>
         </div>
-        <h3>Add Entry</h3>
+        <h3>View Database</h3>
         <div class="inner-body">
             <table>
                 <tbody>
                     <tr>
                         <td id="main-landing">
-                            <p>Add students n stuff.</p>
+                            <p>View tables n stuff.</p>
                         </td>
                     </tr>
                 </tbody>
