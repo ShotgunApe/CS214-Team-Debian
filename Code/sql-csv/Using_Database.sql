@@ -19,6 +19,9 @@ INSERT INTO Students VALUES (1, 'AStudent', 'Name', 'aname@wooster.edu', 'Comput
 INSERT INTO Students VALUES (2, 'Another', 'Last', 'alast@wooster.edu', 'Data Science', 'Sophomore', '2001-01-01', 'Female', '5554384929',
 '3104 Address Ave.', 3.2, 3.44, 3.9);
 
+INSERT INTO Students VALUES (3, 'Will', 'Sieber', 'wsieber@wooster.edu', 'Computer Science', 'Senior', '2003-01-01', 'Male', '3749369343',
+'2308 Address Lane.', 2.0, 3.00, 1.9);
+
 INSERT INTO Enrollments VALUES (1, 1, 1, 'Spring 2024');
 
 

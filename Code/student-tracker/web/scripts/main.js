@@ -3,32 +3,37 @@ $.ajaxSetup({
 });
 
 (function($) {
-    $.fn.load_rating_data = function() { 
-        //Get userID to use info for
-        var parts = window.location.pathname.split('/');
-        var lastSegment = parts.pop() || parts.pop();  //Handle potential trailing slash
-        ID = parseInt(lastSegment) - 1;
+    $.fn.load_students = function() {
+        $.ajax({
+            url: "/ajax", success: function(result) {
+                var data = $.parseJSON(result)
 
-        $.getJSON("/web/data/users.json", function(data) {
-            user = data[ID].username;
-            console.log(user);
-            $("#username").append(`<h3>` + user + `</h3>`);
-
-            rating_data = data[ID].ratings;
-            $.each(rating_data, function(value) {
-                //Slightly ew and i noticed why but im keeping it because its funny
-                $("#rating-data").append(value + " " + "-" + " " + rating_data[value] + `<br>`);
-            });
+                $.each(data["Clients"], function(i, item) {
+                    var tbl_body = document.createElement("tbody");
+                    $.each(item, function(attr) {
+                        // holy shit
+                        var row = tbl_body.insertRow();
+                        var cell_name = row.insertCell();
+                        cell_name.appendChild(document.createTextNode(attr.toString()));
+                        var cell_info = row.insertCell();
+                        cell_info.appendChild(document.createTextNode(item[attr].toString()));
+                    });
+                    $("#table").append(tbl_body);
+                });
+                $.each(data["ClientsTwo"], function(i, item) {
+                    var tbl_body = document.createElement("tbody");
+                    $.each(item, function(attr) {
+                        // holy shit
+                        var row = tbl_body.insertRow();
+                        var cell_name = row.insertCell();
+                        cell_name.appendChild(document.createTextNode(attr.toString()));
+                        var cell_info = row.insertCell();
+                        cell_info.appendChild(document.createTextNode(item[attr].toString()));
+                    });
+                    $("#table-two").append(tbl_body);
+                });
+            }
         });
         return this;
     };
-    $.fn.load_all_users = function() {
-        $.getJSON("/web/data/users.json", function(data) {
-            $.each(data, function(user) {
-                $("#main-landing").append(`<a href="/userpage/` + data[user].id + `">` + data[user].username + `</a><br><br>`);
-            });
-        });
-
-        return this;
-    }
 })(jQuery);

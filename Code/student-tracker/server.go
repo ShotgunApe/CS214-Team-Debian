@@ -32,10 +32,17 @@ func main() {
 			if r.URL.Path[1:10] == "add-entry" {
 				http.ServeFile(w, r, "web/html/add-entry/index.html")
 			}
+		} else if len(r.URL.Path) == 14 || (len(r.URL.Path) == 15 && r.URL.Path[14:15] == "/") {
+			if r.URL.Path[1:14] == "view-database" {
+				http.ServeFile(w, r, "web/html/view-database/index.html")
+			}
 		} else {
 			http.ServeFile(w, r, "web/html/404/index.html")
 		}
+
 	})
+	http.HandleFunc("/ajax", ajaxHandler)
+	http.HandleFunc("/ajax-send", ajaxHandlerSend)
 
 	//Serves local webpage for testing
 	if settings.Testing == "true" {
@@ -50,6 +57,17 @@ func main() {
 			log.Fatal("Web server (HTTPS): ", errhttps)
 		}
 	}
+
+}
+
+// AJAX Request Handler
+func ajaxHandler(w http.ResponseWriter, r *http.Request) {
+	//parse request to struct
+	var d = student.GetStudents()
+	w.Write(d)
+}
+
+func ajaxHandlerSend(w http.ResponseWriter, r *http.Request) {
 
 }
 
