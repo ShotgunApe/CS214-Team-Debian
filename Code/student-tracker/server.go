@@ -42,6 +42,7 @@ func main() {
 
 	})
 	http.HandleFunc("/ajax", ajaxHandler)
+	http.HandleFunc("/ajax-send", ajaxHandlerSend)
 
 	//Serves local webpage for testing
 	if settings.Testing == "true" {
@@ -64,6 +65,10 @@ func ajaxHandler(w http.ResponseWriter, r *http.Request) {
 	//parse request to struct
 	var d = student.GetStudents()
 	w.Write(d)
+}
+
+func ajaxHandlerSend(w http.ResponseWriter, r *http.Request) {
+
 }
 
 func (c *Settings) getSettings() *Settings {
