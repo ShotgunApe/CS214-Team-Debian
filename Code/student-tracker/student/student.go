@@ -2,10 +2,31 @@ package student
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 )
+
+type student struct {
+	StudentID       string `json:StudentID`
+	FirstName       string `json:FirstName`
+	LastName        string `json:LastName`
+	Email           string `json:Email`
+	Major           string `json:Major`
+	ClassYear       string `json:ClassYear`
+	DateOfBirth     string `json:DateOfBirth"`
+	Gender          string `json:Gender`
+	PhoneNumber     string `json:PhoneNumber`
+	Address         string `json:Address`
+	CalculatedGrade string `json:CalculatedGrade`
+	CumulativeGPA   string `json:CumulativeGPA`
+	SemesterGPA     string `json:SemesterGPA`
+}
+
+type connection struct {
+	Clients []*student `json:"Clients"`
+}
 
 func Init() {
 	db, err := sql.Open("mysql", "root:4542@tcp(localhost)/College_Internal_System") //needs to be changed for your database config
@@ -15,7 +36,7 @@ func Init() {
 	defer db.Close()
 }
 
-func GetStudents() {
+func GetStudents() []byte {
 	db, err := sql.Open("mysql", "root:4542@tcp(localhost)/College_Internal_System") //needs to be changed for your database config
 	if err != nil {
 		panic(err.Error()) // Just for example purpose. You should use proper error handling instead of panic (no i dont think i will)
@@ -26,7 +47,6 @@ func GetStudents() {
 	if err != nil {
 		panic(err.Error()) // proper error handling instead of panic in your app
 	}
-
 	// Get column names
 	columns, err := rows.Columns()
 	if err != nil {
@@ -44,6 +64,9 @@ func GetStudents() {
 		scanArgs[i] = &values[i]
 	}
 
+	// init json
+	var students []*student
+
 	// Fetch rows
 	for rows.Next() {
 		// get RawBytes from data
@@ -56,20 +79,26 @@ func GetStudents() {
 		// Here we just print each column as a string.
 
 		// should probably marshall data as json to be sent when called for and returned!
-
-		var value string
-		for i, col := range values {
-			// Here we can check if the value is nil (NULL value)
-			if col == nil {
-				value = "NULL"
-			} else {
-				value = string(col)
-			}
-			fmt.Println(columns[i], ": ", value)
-		}
-		fmt.Println("-----------------------------------")
+		students = append(students, &student{
+			StudentID:       string(values[0]),
+			FirstName:       string(values[1]),
+			LastName:        string(values[2]),
+			Email:           string(values[3]),
+			Major:           string(values[4]),
+			ClassYear:       string(values[5]),
+			DateOfBirth:     string(values[6]),
+			Gender:          string(values[7]),
+			PhoneNumber:     string(values[8]),
+			Address:         string(values[9]),
+			CalculatedGrade: string(values[10]),
+			CumulativeGPA:   string(values[11]),
+			SemesterGPA:     string(values[12]),
+		})
 	}
 	if err = rows.Err(); err != nil {
-		panic(err.Error()) // proper error handling instead of panic in your app
+		panic(err.Error()) // proper error handling instead of panic in your app - nah
 	}
+	p, _ := json.Marshal(connection{Clients: students})
+	fmt.Printf("%s\n", p)
+	return p
 }

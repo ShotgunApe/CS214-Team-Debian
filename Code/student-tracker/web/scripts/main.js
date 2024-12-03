@@ -4,9 +4,10 @@ $.ajaxSetup({
 
 (function($) {
     $.fn.load_students = function() {
-        $.get("student/student.go", function(data) {
-            console.log(data);
+        $.ajax({
+            url: "/ajax", success: function(result) {
+                console.log(result)
+            }
         });
-        return this;
     }
 })(jQuery);

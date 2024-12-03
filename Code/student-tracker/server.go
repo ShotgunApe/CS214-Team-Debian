@@ -18,7 +18,6 @@ func main() {
 	settings.getSettings()
 
 	student.Init()
-	student.GetStudents()
 
 	//Handler points to available directories
 	http.Handle("/web/html", http.StripPrefix("/web/html", http.FileServer(http.Dir("web/html"))))
@@ -40,7 +39,9 @@ func main() {
 		} else {
 			http.ServeFile(w, r, "web/html/404/index.html")
 		}
+
 	})
+	http.HandleFunc("/ajax", ajaxHandler)
 
 	//Serves local webpage for testing
 	if settings.Testing == "true" {
@@ -56,6 +57,13 @@ func main() {
 		}
 	}
 
+}
+
+// AJAX Request Handler
+func ajaxHandler(w http.ResponseWriter, r *http.Request) {
+	//parse request to struct
+	var d = student.GetStudents()
+	w.Write(d)
 }
 
 func (c *Settings) getSettings() *Settings {
