@@ -68,7 +68,7 @@ func ajaxHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func ajaxHandlerSend(w http.ResponseWriter, r *http.Request) {
-
+	student.WriteStudents()
 }
 
 func (c *Settings) getSettings() *Settings {

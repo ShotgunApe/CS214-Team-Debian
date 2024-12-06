@@ -157,3 +157,16 @@ func GetStudents() []byte {
 	fmt.Printf("%s\n", p)
 	return p
 }
+
+func WriteStudents() {
+	db, err := sql.Open("mysql", "root:4542@tcp(localhost)/College_Internal_System") //needs to be changed for your database config
+	if err != nil {
+		panic(err.Error()) // Just for example purpose. You should use proper error handling instead of panic (no i dont think i will)
+	}
+	defer db.Close()
+
+	//query, err := db.Query("SELECT * FROM Students")
+	//if err != nil {
+	//	panic(err.Error()) // proper error handling instead of panic in your app
+	//}
+}

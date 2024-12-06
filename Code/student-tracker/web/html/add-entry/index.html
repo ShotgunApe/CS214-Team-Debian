@@ -4,115 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/web/css/main.css" />
+    <script src="/web/scripts/jquery-3.7.1.min.js"></script>
+    <script src="/web/scripts/main.js"></script>
     <title>Student Tracker</title>
     <style>
-        /* General styling */
-        body {
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            font-size: 14px;
-            margin: 0;
-            padding: 0;
-        }
-
-        .navbar {
-            border-bottom: 1px solid #dfdfdf;
-            background-color: #f8f8f8;
-            overflow: auto;
-            padding: 10px 0;
-        }
-
-            .navbar ul {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-                display: flex;
-                justify-content: space-around;
-            }
-
-            .navbar li {
-                display: inline;
-            }
-
-                .navbar li a {
-                    color: #000000;
-                    text-decoration: none;
-                    padding: 10px 20px;
-                    transition: background-color 0.3s ease, color 0.3s ease;
-                }
-
-                    .navbar li a:hover {
-                        background-color: #cccccc;
-                        color: #ffffff;
-                    }
-
-        h3 {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .inner-body {
-            background-color: #ffffff;
-            border: 1px solid #dfdfdf;
-            border-radius: 10px;
-            margin: 20px auto;
-            max-width: 800px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        #main-landing p {
-            font-size: 16px;
-            margin: 0;
-        }
-
-
-        /* Button styling */
-
-        button {
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            color: #ffffff;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-        }
-
-            button:hover {
-                background-color: #0056b3;
-            }
-
-        /* Footer styling */
-
-
-        footer {
-            text-align: center;
-            font-size: 10px;
-            margin-top: 20px;
-            padding: 10px 0;
-            background-color: #f8f8f8;
-            border-top: 1px solid #dfdfdf;
-        }
-
-        /* Responsive design */
-        @media screen and (max-width: 768px) {
-            .inner-body {
-                max-width: 90%;
-                padding: 10px;
-            }
-
-            .navbar ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .navbar li a {
-                display: block;
-                width: 100%;
-                text-align: center;
-            }
-        }
+        
     </style>
 </head>
 <body>
@@ -131,12 +27,17 @@
             <tbody>
                 <tr>
                     <td id="main-landing">
-                        <p>Add students n stuff.</p>
+                        <form onclick=$().send_students(); method="POST">
+                            <label>
+                                Please enter your name: 
+                                <input type="text" name="username" minlength="3" maxlength="20" required>
+                            </label> 
+                            <button type="submit">Submit</button>
+                        </form>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <button>Submit</button>
     </div>
 
     <footer>

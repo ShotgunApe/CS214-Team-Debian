@@ -36,4 +36,8 @@ $.ajaxSetup({
         });
         return this;
     };
+    $.fn.send_students = function() {
+        console.log("pong")
+    }
+
 })(jQuery);
