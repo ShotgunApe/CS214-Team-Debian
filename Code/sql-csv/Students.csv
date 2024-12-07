@@ -1,3 +1,0 @@
-StudentID,FirstName,LastName,Email,Major,ClassYear,DateOfBirth,Gender,PhoneNumber,Address,CalculatedGrade,CumulativeGPA,SemesterGPA
-1,AStudent,Name,aname@wooster.edu,"Computer Science",Junior,2001-01-01,Male,5554381929,"3074 Address Ave.",3.00,3.74,3.80
-2,Another,Last,alast@wooster.edu,"Data Science",Sophomore,2001-01-01,Female,5554384929,"3104 Address Ave.",3.20,3.44,3.90

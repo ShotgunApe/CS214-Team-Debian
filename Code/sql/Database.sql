@@ -1,3 +1,6 @@
+# If error, execute twice
+
+CREATE DATABASE College_Internal_System;
 USE College_Internal_System;
 
 #  Create the Students Table
